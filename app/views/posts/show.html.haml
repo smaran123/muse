@@ -3,4 +3,15 @@
 %p=  @post.link
 %p= @post.user.name
 %p= image_tag @post.image
+
+= link_to "Like", like_post_path(@post)
+= pluralize(@post.get_upvotes.size, "Like")
+= link_to "Dislike",dislike_post_path(@post)
+= pluralize(@post.get_downvotes.size, "DisLike")
+
+%h1 Comments
+=  render @post.comments
+%h1 New Comment
+
+= render "comments/form"
 = link_to "Back", posts_path

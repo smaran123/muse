@@ -7,8 +7,21 @@
 						%p.title= post.title
 						%p.date= time_ago_in_words(post.created_at)
 						= link_to (image_tag post.image), post
+						.data.clearfix
+						%p.username
+						Shared by
+						= post.user.name
+
+						%p.buttons
+						%span
+							%i.fa.fa-comments-o
+							= post.comments.count
+							= post.get_likes.size
+							= post.get_dislikes.size
 		- else
 			%h2 Add a Post
 			%p It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.
 
 		%button= link_to "New Post", new_post_path
+
+
