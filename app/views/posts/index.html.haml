@@ -1,0 +1,13 @@
+.wrapper_with_padding
+	#notes.clearfix
+		- unless @posts.blank?
+			- @posts.each do |post|
+				%a{ href: (url_for [post])}
+					.note
+						%p.title= post.title
+						%p.date= time_ago_in_words(post.created_at)
+		- else
+			%h2 Add a Post
+			%p It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.
+
+		%button= link_to "New Post", new_post_path
