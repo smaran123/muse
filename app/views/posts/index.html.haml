@@ -6,6 +6,7 @@
 					.note
 						%p.title= post.title
 						%p.date= time_ago_in_words(post.created_at)
+						= link_to (image_tag post.image), post
 		- else
 			%h2 Add a Post
 			%p It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.
