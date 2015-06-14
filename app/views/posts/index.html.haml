@@ -1,27 +1,33 @@
-.wrapper_with_padding
-	#notes.clearfix
-		- unless @posts.blank?
-			- @posts.each do |post|
-				%a{ href: (url_for [post])}
-					.note
-						%p.title= post.title
-						%p.date= time_ago_in_words(post.created_at)
-						= link_to (image_tag post.image), post
-						.data.clearfix
-						%p.username
+- if user_signed_in?
+	%p#intro
+		Hello
+		= current_user.name
+		%br/
+		%span
+			Share your inspiration and see what's inspiring others.
+- else
+	%p#intro
+		What's your muse?
+		%br/
+		%span
+			Share your inspiration and see what's inspiring others.
+#posts
+	- @posts.each do |post|
+		.post
+			.post_image
+				= link_to (image_tag post.image.url(:small)), post
+			.post_content
+				.title
+					%h2= link_to post.title, post
+				.data.clearfix
+					%p.username
 						Shared by
 						= post.user.name
-
-						%p.buttons
+					%p.buttons
 						%span
 							%i.fa.fa-comments-o
 							= post.comments.count
+						%span
+							%i.fa.fa-thumbs-o-up
 							= post.get_likes.size
-							= post.get_dislikes.size
-		- else
-			%h2 Add a Post
-			%p It appears you haven't created any notes yet... Lets fix that. Why don't you go ahead and create a new note.
-
-		%button= link_to "New Post", new_post_path
-
 

@@ -1,24 +1,32 @@
 !!!
 %html
 %head
-	%title NoteNote | Online Notebook
+	%title Muse
 	= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-	= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	%link{:rel => "stylesheet", :href => "http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css"}
+	%link{:rel => "stylesheet", :href => "http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"}
 	= javascript_include_tag 'application', 'data-turbolinks-track' => true
 	= csrf_meta_tags
 %body
 	%header 
-		.header_inner
+		.wrapper.clearfix
+			#logo= link_to "Muse", root_path
 			%nav
 				- if user_signed_in?
-					= link_to "NewPost", new_post_path
+					= link_to current_user.name, edit_user_registration_path
+					= link_to "NewPost", new_post_path, class: "button"
 					= link_to "Signout", destroy_user_session_path,:method=>"delete"
 				- else
 					= link_to "SignIn", new_user_session_path	
+					= link_to "Sign Up", new_user_registration_path, class: "button"
 
-	%p.notie
-		= notice
-	%p.alert
-		= alert
-	= yield
+	%p.notie= notice
+	%p.alert= alert
+	.wrapper
+		= yield
 
+	
+
+
+
+		
