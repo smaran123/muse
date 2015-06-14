@@ -1,0 +1,22 @@
+
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: root
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  <<: *default
+  database: muse_development
+
+test:
+  <<: *default
+  database: muse_test
+
+production:
+  <<: *default
+  database: muse_production
+  username: muse
+  password: <%= ENV['MUSE_DATABASE_PASSWORD'] %>
